@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实例方法</title>
+    <script src="../public/js/vue.js"></script>
+    <script src="../public/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+   <div id="app">
+   </div>
+   <p>
+       <button onclick="destroy()">销毁</button>
+       <button onclick="update()">更新</button>
+       <button onclick="tick()">更改数据</button>
+   </p>
+   <script>
+           var example = Vue.extend({
+               template:`<p>{{message}}</p>`,
+               data:function () {
+                   return {
+                       message:'扩张实例'
+                   }
+               },
+               mounted:function () {
+                   console.log("已经挂载成功！")
+               },
+               destroyed:function () {
+                   console.log("构造器已经销毁！")
+               },
+               updated:function () {
+                   console.log("构造器更新")
+               }
+           });
+           var vm = new example().$mount('#app');
+           function destroy() {
+               vm.$destroy();
+           }
+           function update() {
+               vm.$forceUpdate();
+           }
+           function tick() {
+               vm.message="数据已经修改！";
+               vm.$nextTick(function () {
+                   console.log("更改数据")
+               });
+           }
+   </script>
+</body>
+</html>

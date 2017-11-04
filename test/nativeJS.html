@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生JS方法</title>
+</head>
+<body>
+  <script type="text/javascript">
+      window.onload = function () {
+          var method1 = document.getElementById('method1');
+          var method2 = document.getElementById('method2');
+           method1.onclick = function (){
+               alert('dom添加方法');
+           }
+          method2.addEventListener("click", function(){
+              alert("dom运用addEventListener,添加方法");
+          });
+      }
+      function add() {
+          alert("在html上用onclic='add()'添加方法");
+          var c = confirm("这是原生的方法");
+         if(c){
+             alert("you click ensure");
+         }else {
+             alert("you click cancel")
+         }
+      }
+      console.log(navigator);
+      console.log(navigator.languages);
+      alert(navigator.javaEnabled())
+  </script>
+  <button onclick="add()">JS原生方法调用1</button>
+  <button id="method1">JS原生方法调用2</button>
+  <button id="method2">JS原生方法调用3</button>
+</body>
+</html>

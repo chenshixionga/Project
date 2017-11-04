@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery方法</title>
+    <script src="../public/js/jquery-3.2.1.min.js"></script>
+    <style>
+        div span{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+   <script type="text/javascript">
+       window.onload=function () {
+//           jQuery三种方法调用
+           $('.btn1').click(function () {
+               alert('jQuery One!');
+           })
+           $('.btn2').on('click',function () {
+               alert('two');
+           })
+           $(document).on('click','.btn3',function () {
+               alert('three');
+           })
+       }
+
+   </script>
+   <div>
+       <span class="btn1">按钮1</span>
+       <span class="btn2">按钮2</span>
+       <span class="btn3">按钮3</span>
+   </div>
+</body>
+</html>

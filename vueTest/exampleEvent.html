@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-jQuery</title>
+    <script src="../public/js/vue.js"></script>
+    <script src="../public/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <p>{{price}}</p>
+    <button @click="add">增加</button>
+    <!--<button @click="reduce">减少</button>-->
+</div>
+<button onclick="reduce()">减少</button>
+<button onclick="reduceOnce()">一次函数</button>
+<button onclick="off()">关闭on函数</button>
+<script>
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+                price:100,
+                reminder:"价钱正常"
+            },
+            methods:{
+                add:function () {
+                    this.price+=10;
+                }
+            }
+        })
+        // 实例事件，可以直接改变构造器中的data值
+        app.$on('reduce',function () {
+            this.price-=10;
+        })
+        function reduce() {
+            app.$emit('reduce');//调用实例事件的方法$emit()
+        }
+        app.$once('reduceOnce',function () {
+            this.price-=20;
+        })
+        function reduceOnce() {
+            app.$emit('reduceOnce');
+        }
+        function off() {
+            app.$off('reduce');
+        }
+</script>
+</body>
+</html>

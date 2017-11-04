@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>methods选项四特性</title>
+    <script src="../public/js/vue.js"></script>
+</head>
+<body>
+   <script>
+       window.onload = function () {
+           var btn = {
+               template:`<button>{{content}}</button>`,
+               props:["content"]
+           }
+           var app = new Vue({
+              el:'#app',
+              data:{
+                  price:100,
+              },
+              methods:{
+                  add:function (num , event) {
+                      this.price+=num;
+                      console.log(event);
+                  }
+              },
+               components:{
+                  "btn":btn
+               }
+           })
+           var scopeOut = document.getElementById('scope');
+           scopeOut.onclick=function () {
+               app.add(4, 4);//作用域外调用构造器中的方法
+           }
+       }
+   </script>
+   <div id="app">
+      <p>{{price}}</p>
+       <!--$event 相当于mouseEvent-->
+       <button @click="add(10,$event)">增加</button>
+       <!--组件中调用构造器中的方法 native-->
+       <btn content="组件调用方法" @click.native="add(10,$event)"></btn>
+   </div>
+    <button id = "scope">作用域外</button>
+</body>
+</html>

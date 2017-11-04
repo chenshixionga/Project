@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-jQuery</title>
+    <script src="../public/js/vue.js"></script>
+    <script src="../public/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+   <script>
+       window.onload = function () {
+
+           var app = new Vue({
+              el:'#app',
+              data:{
+                  price:100,
+                  reminder:"价钱正常"
+              },
+              methods:{
+                  add:function () {
+                      this.price+=10;
+                  }
+              },
+               mounted:function () {
+                   $("#app p").after('<p>融合成功</p>');
+               }
+           })
+           app.add()
+       }
+
+   </script>
+   <div id="app">
+       <p>{{price}}</p>
+       <button @click="add">增加</button>
+   </div>
+</body>
+</html>

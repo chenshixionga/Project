@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监控数据watch</title>
+    <script src="../public/js/vue.js"></script>
+</head>
+<body>
+   <script>
+       window.onload = function () {
+
+           var app = new Vue({
+              el:'#app',
+              data:{
+                  price:100,
+                  reminder:"价钱正常"
+              },
+              methods:{
+                  add:function () {
+                      this.price+=10;
+                  }
+              },
+               watch:{
+                  price:function (newVal,oldVal) {
+                      console.log(newVal);
+                      console.log(oldVal);
+                      if(newVal>150){
+                          this.reminder='价钱过高';
+                      }
+                  }
+               }
+           })
+       }
+   </script>
+   <div id="app">
+       <p>{{price}}</p>
+       <P>{{reminder}}</P>
+       <button @click="add">增加</button>
+   </div>
+</body>
+</html>

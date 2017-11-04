@@ -5,7 +5,63 @@
     <title>VUE组件</title>
 </head>
 <script type="text/javascript" src="../public/js/vue.js"></script>
-<body>
+    <body>
+        <script>
+           window.onload=function () {
+               var childPanda = {
+                   template:`<div>panda's child is cute</div>`
+               }
+               var panda = {
+                   template:`<div>
+                                   <p> I is a panda with sex: {{sex}} add age :{{age}}!</p>
+                                   <childPanda></childPanda>
+                             </div>`,
+                   props:["sex","age"],
+                   components:{
+                       "childPanda":childPanda
+                   }
 
-</body>
+               };
+               var componentA = {
+                   template:'<div>componentA</div>'
+               };
+               var componentB = {
+                   template:'<div>componentB</div>'
+               };
+               var componentC = {
+                   template:'<div>componentC</div>'
+               };
+               var app = new Vue({
+                   el:'#app',
+                   data:{
+                       message:"简单",
+                       who:'componentA'
+                   },
+                   components:{
+                       "panda":panda,
+                       "componentA":componentA,
+                       "componentB":componentB,
+                       "componentC":componentC
+                   },
+                   methods:{
+                       getComponent:function () {
+                           if(this.who=='componentA'){
+                               this.who='componentB'
+                           }else if(this.who=='componentB'){
+                               this.who='componentC'
+                           }else {
+                               this.who='componentA'
+                           }
+                       }
+                   }
+               })
+           }
+        </script>
+        <div id="app">
+            <span>{{message}}</span>
+            <panda sex="boy" age="7"></panda>
+            <component :is= who></component>
+            <button @click="getComponent()" >替换组件</button>
+        </div>
+    </body>
 </html>
